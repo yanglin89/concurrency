@@ -49,6 +49,7 @@ public class CountExample6 {
 			});
 		}
 		countDownLatch.await();
+		executorService.shutdown();
 		logger.info("isHappend:"+isHappend.get());//获取值
 	}
 	

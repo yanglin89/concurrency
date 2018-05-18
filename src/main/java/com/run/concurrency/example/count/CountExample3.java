@@ -42,6 +42,7 @@ public class CountExample3 {
 			});
 		}
 		countDownLatch.await();
+		executorService.shutdown();
 		logger.info("count:"+count);
 	}
 	

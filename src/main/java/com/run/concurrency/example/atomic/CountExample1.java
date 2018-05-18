@@ -44,6 +44,7 @@ public class CountExample1 {
 			});
 		}
 		countDownLatch.await();
+		executorService.shutdown();
 		logger.info("count:"+count.get());
 	}
 	
