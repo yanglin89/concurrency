@@ -1,37 +1,35 @@
 package com.run.concurrency.example.commonUnsafe;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.run.concurrency.ConcurrencyTest;
-import com.run.concurrency.annoations.Recommend;
-import com.run.concurrency.annoations.ThreadSafe;
+import com.run.concurrency.annoations.NotThreadSafe;
 
 /**
  * @author user
- * 使用joda-time实现日期转换线程安全
- * 推荐使用joda-time
+ * 使用HashMap做多线程，线程不安全
  */
-@ThreadSafe
-@Recommend
-public class DateFormatExample3 {
+@NotThreadSafe
+public class HashMapExample {
+
 	private static Logger logger = LoggerFactory.getLogger(ConcurrencyTest.class);
 
-	private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
+	private static Map<Integer,Integer> map = new HashMap<Integer,Integer>(); 
 	
 	//请求总数
-	public static int clientTotal = 50;
+	public static int clientTotal = 5000;
 	//并发线程数量
-	public static int threadTotal = 2;
+	public static int threadTotal = 200;
 	
 	public static void main(String[] args) throws Exception {
 		ExecutorService executorService = Executors.newCachedThreadPool();
@@ -53,11 +51,11 @@ public class DateFormatExample3 {
 		}
 		countDownLatch.await();
 		executorService.shutdown();
+		logger.info("map.size:"+map.size());
 	}
 	
 	private static void update(int i) {
-		Date date = DateTime.parse("20180518",dateTimeFormatter).toDate();
-		logger.info("i的值:"+i+"date:"+date);
+		map.put(i,i);
 	}
 	
 }
