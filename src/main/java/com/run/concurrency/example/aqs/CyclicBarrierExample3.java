@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Yangwork
  * CyclicBarrier
+ * CyclicBarrier.reset() 是将屏障状态置为初始状态
  */
 public class CyclicBarrierExample3 {
 	
