@@ -4,9 +4,13 @@
 7.5
 9.1
 10.2
+12.2
 
 
 先检查在执行，是线程不安全的因素：if(condition(a)){handle(a);}
 
 JUC：java util concurrent
 JUC主要包含tools、locks、atomic、Collections和executor五大部分
+
+重点：
+hashMap 与 concurrentHashMap 的区别
